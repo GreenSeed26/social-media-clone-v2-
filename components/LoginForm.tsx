@@ -45,7 +45,7 @@ function LoginForm() {
         onSubmit={handleSignin}
         className="flex w-[350px] flex-col gap-1 border p-4"
       >
-        <h1 className="text-2xl font-bold my-1">Sign In</h1>
+        <h1 className="my-1 text-2xl font-bold">Sign In</h1>
         <div className="flex flex-col">
           <label htmlFor="" className="p-1 text-xs font-semibold">
             Email
@@ -76,7 +76,7 @@ function LoginForm() {
         </button>
 
         <p className="mt-1 text-center text-xs">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/register" className="text-blue-500 underline">
             Sign Up
           </Link>
