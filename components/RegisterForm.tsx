@@ -25,7 +25,7 @@ function RegisterForm() {
       if(confirmPassword != password){
         return alert("password doesn't match")
       }
-      const res = await fetch("api/user", {
+      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

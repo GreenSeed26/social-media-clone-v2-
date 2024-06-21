@@ -53,7 +53,7 @@ function EditProfile({ user }: { user: UserProps }) {
           options: uploadOptions,
         });
 
-        await fetch(`/api/user/${user.nametag}`, {
+        await fetch(`${process.env.NEXTAUTH_URL}/api/user/${user.nametag}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -64,7 +64,7 @@ function EditProfile({ user }: { user: UserProps }) {
         });
       }
 
-      const res = await fetch(`/api/user/${user.nametag}`, {
+      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user/${user.nametag}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
