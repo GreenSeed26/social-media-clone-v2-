@@ -103,7 +103,7 @@ function ChangeProfilePic({
   return (
     <Dialog open={open}>
       <DialogTrigger asChild>
-        <div className="group relative h-36 cursor-pointer">
+        <div className="group relative h-36 cursor-pointer ">
           <div className="absolute bottom-5 right-3.5 z-50 rounded border bg-white/70 px-2 py-1 text-sm font-semibold opacity-0 transition-all group-hover:-bottom-9 group-hover:opacity-100">
             Change Avatar
           </div>

@@ -6,12 +6,18 @@ import { useRouter } from "next/navigation";
 import { useEdgeStore } from "@/lib/edgestore";
 import CropImage from "./CropImage";
 import { useToast } from "./ui/use-toast";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 
-function EditProfile({ user }: { user: UserProps }) {
+function EditProfile({
+  user,
+  url,
+}: {
+  user: UserProps;
+  url: string | undefined;
+}) {
   const [newName, setNewName] = useState(user.fullName);
   const [newUsername, setNewUsername] = useState(user.nametag);
   const [newImage, setNewImage] = useState(user.image);
+  const [newBio, setNewBio] = useState(user.bio);
   const [imgFile, setImgFile] = useState<File>();
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
@@ -33,6 +39,7 @@ function EditProfile({ user }: { user: UserProps }) {
       newName === user.fullName &&
       newUsername === user.nametag &&
       newImage === user.image &&
+      newBio === user.bio &&
       !imgFile
     ) {
       setLoading(false);
@@ -53,7 +60,7 @@ function EditProfile({ user }: { user: UserProps }) {
           options: uploadOptions,
         });
 
-        await fetch(`${process.env.NEXTAUTH_URL}/api/user/${user.nametag}`, {
+        await fetch(`${url}/api/user/${user.nametag}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -64,16 +71,20 @@ function EditProfile({ user }: { user: UserProps }) {
         });
       }
 
-      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user/${user.nametag}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        `${url}/api/user/${user.nametag}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName: newName,
+            nametag: newUsername,
+            bio: newBio,
+          }),
         },
-        body: JSON.stringify({
-          fullName: newName,
-          nametag: newUsername,
-        }),
-      });
+      );
 
       if (res.ok) {
         toast({
@@ -90,10 +101,8 @@ function EditProfile({ user }: { user: UserProps }) {
 
   return (
     <div className="mx-auto w-[640px] border">
-      <form onSubmit={handleSubmit} className="flex gap-2 p-8">
-        
-          <CropImage pfp={newImage} updateProfileUrl={getCroppedImg} />
-        
+      <form onSubmit={handleSubmit} className="flex items-center gap-2 p-8">
+        <CropImage pfp={newImage} updateProfileUrl={getCroppedImg} />
 
         <div className="ml-4 flex flex-1 flex-col gap-2">
           <label className="text-sm font-semibold" htmlFor="fullName">
@@ -116,7 +125,14 @@ function EditProfile({ user }: { user: UserProps }) {
             name="nametag"
             value={newUsername}
           />
-
+          <label className="text-sm font-semibold" htmlFor="bio">
+            Bio
+          </label>
+          <textarea
+            onChange={(e) => setNewBio(e.target.value)}
+            value={newBio}
+            className="h-24 resize-none border px-2 text-sm outline-none"
+          ></textarea>
           <button
             className={`mt-2 h-8 text-sm font-semibold text-white ${loading ? "bg-slate-600" : "bg-slate-800 hover:bg-slate-700"} transition-all`}
             disabled={loading}

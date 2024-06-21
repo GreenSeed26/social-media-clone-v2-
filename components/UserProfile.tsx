@@ -51,8 +51,12 @@ export default function UserProfile({ user }: { user: UserProps }) {
             </div>
           </div>
         </div>
+    
       </div>
-      {/* <EditProfile/> */}
+
+      <div className="px-4 p-1 text-center">
+        <p className="text-sm">{user.bio}</p>
+      </div>
     </main>
   );
 }

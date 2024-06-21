@@ -4,6 +4,7 @@ export type UserProps = {
   fullName: string;
   nametag: string;
   image: string;
+  bio: string;  
   followCount: number;
   joinedAt: Date;
   username: string;

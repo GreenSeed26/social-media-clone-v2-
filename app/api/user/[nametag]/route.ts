@@ -25,7 +25,7 @@ export async function PUT(
 ) {
   const id = params.nametag;
 
-  const { fullName, nametag, image, followCount } = await req.json();
+  const { fullName, nametag, image, bio, followCount } = await req.json();
   try {
     const user = await prisma.user.update({
       where: {
@@ -35,6 +35,7 @@ export async function PUT(
         fullName,
         nametag,
         image,
+        bio,  
         followCount,
       },
     });
