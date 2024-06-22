@@ -35,7 +35,7 @@ export async function PUT(
         fullName,
         nametag,
         image,
-        bio,  
+        bio,
         followCount,
       },
     });

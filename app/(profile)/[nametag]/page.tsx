@@ -18,7 +18,7 @@ async function ProfilePage({ params }: { params: { nametag: string } }) {
   const session = await getServerSession(authOptions);
 
   const { nametag } = params;
-  const nexturl = process.env.NEXTAUTH_URL;
+  const nexturl = process.env.API_URL;
 
   const res = await fetch(`${nexturl}/api/user/${nametag}`, {
     cache: "no-store",

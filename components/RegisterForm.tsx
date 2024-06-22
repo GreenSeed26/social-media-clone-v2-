@@ -21,11 +21,10 @@ function RegisterForm() {
       return alert("All fields must filled in");
 
     try {
-
-      if(confirmPassword != password){
-        return alert("password doesn't match")
+      if (confirmPassword != password) {
+        return alert("password doesn't match");
       }
-      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

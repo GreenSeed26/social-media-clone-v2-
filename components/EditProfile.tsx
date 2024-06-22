@@ -7,13 +7,7 @@ import { useEdgeStore } from "@/lib/edgestore";
 import CropImage from "./CropImage";
 import { useToast } from "./ui/use-toast";
 
-function EditProfile({
-  user,
-  url,
-}: {
-  user: UserProps;
-  url: string | undefined;
-}) {
+function EditProfile({ user }: { user: UserProps }) {
   const [newName, setNewName] = useState(user.fullName);
   const [newUsername, setNewUsername] = useState(user.nametag);
   const [newImage, setNewImage] = useState(user.image);
@@ -60,19 +54,22 @@ function EditProfile({
           options: uploadOptions,
         });
 
-        await fetch(`${url}/api/user/${user.nametag}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
+        await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/user/${user.nametag}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              image: res.url,
+            }),
           },
-          body: JSON.stringify({
-            image: res.url,
-          }),
-        });
+        );
       }
 
       const res = await fetch(
-        `${url}/api/user/${user.nametag}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/user/${user.nametag}`,
         {
           method: "PUT",
           headers: {

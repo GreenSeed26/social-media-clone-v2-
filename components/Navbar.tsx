@@ -25,7 +25,7 @@ export default async function Navbar() {
 
 export async function getServerSideProps(user: string) {
   try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user/${user}`, {
+    const res = await fetch(`${process.env.API_URL}/api/user/${user}`, {
       cache: "no-store",
     });
 

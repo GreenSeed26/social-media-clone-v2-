@@ -11,15 +11,13 @@ export const metadata: Metadata = {
 async function EditPage({ params }: { params: { nametag: string } }) {
   const { nametag } = params;
 
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user/${nametag}`, {
+  const res = await fetch(`${process.env.API_URL}/api/user/${nametag}`, {
     cache: "no-store",
   });
 
-
-
   const user = await res.json();
 
-  return <EditProfile user={user} url={process.env.NEXTAUTH_URL} />;
+  return <EditProfile user={user} />;
 }
 
 export default EditPage;
